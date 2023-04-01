@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simple_todo_list/i18n/strings.g.dart';
 import 'package:simple_todo_list/pages/main/presentation/main_page_keys.dart';
 
 class CreateTodoDialog extends StatefulWidget {
@@ -14,18 +15,18 @@ class _CreateTodoDialogState extends State<CreateTodoDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Add a new todo item'),
+      title: Text(context.t.add_title),
       content: TextField(
         key: const Key(MainPageKeys.entryTextField),
         controller: _textEditingController,
-        decoration: const InputDecoration(hintText: "Type your new todo"),
+        decoration: InputDecoration(hintText: context.t.add_text_hint),
       ),
       actions: <Widget>[
         MaterialButton(
           key: const Key(MainPageKeys.addDialogButton),
           color: Colors.green,
           textColor: Colors.white,
-          child: const Text('Add'),
+          child: Text(context.t.add_button),
           onPressed: () {
             Navigator.pop(context, _textEditingController.text);
           },

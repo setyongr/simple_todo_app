@@ -1,0 +1,7 @@
+{
+  "title": "Todo List",
+  "empty_todo": "No Todo List Found",
+  "add_title": "Add a new todo item",
+  "add_button": "Add",
+  "add_text_hint": "Type your new todo"
+}

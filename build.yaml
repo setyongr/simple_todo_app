@@ -1,0 +1,9 @@
+targets:
+  $default:
+    builders:
+      slang_build_runner:
+        options:
+          translation_overrides: true
+          string_interpolation: braces
+          input_directory: assets/translations
+          output_directory: lib/i18n

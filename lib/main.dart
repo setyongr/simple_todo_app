@@ -4,12 +4,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_todo_list/app/app.dart';
 import 'package:simple_todo_list/app/registry/di.dart';
+import 'package:simple_todo_list/i18n/strings.g.dart';
 
 Future main({
   Future<void> Function()? additionalSetup,
 }) async {
   await runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
+    LocaleSettings.useDeviceLocale();
 
     setupInjection();
 

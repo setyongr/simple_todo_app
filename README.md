@@ -35,6 +35,7 @@ The directory is structured as:
 - get_it
 - go_router
 - drift
+- slang
 
 # Screenshot
 
@@ -48,3 +49,37 @@ The directory is structured as:
 2. Make sure you install atleast Flutter 3.7.7
 3. Run `flutter pub get` to install dependency
 4. Run it with `flutter run lib/main.dart`
+
+## Localization / Internationalization
+
+We use https://pub.dev/packages/slang to do localization / internationalization
+
+### Creating Translation
+
+We manage translation using `json` file. The json file is located at
+
+- English : `assets/translations/strings_en.i18n.json`
+
+### Generating Translation Key
+
+After we modified the translation, we need to run code generation to generate a code that we can use.
+
+```bash
+flutter pub run slang
+```
+
+### Using the translation
+
+To use the string translation we can call this code
+
+```dart
+t.myTranslation
+```
+
+or
+
+```
+context.t.myTranslation;
+```
+
+Using context is more preferred because it will rebuild the widget if locale is changed.

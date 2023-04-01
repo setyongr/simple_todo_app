@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_todo_list/app/registry/di.dart';
 import 'package:simple_todo_list/data/todos/model/todo_data.dart';
+import 'package:simple_todo_list/i18n/strings.g.dart';
 import 'package:simple_todo_list/pages/main/bloc/todo_bloc.dart';
 import 'package:simple_todo_list/pages/main/presentation/main_page_keys.dart';
 import 'package:simple_todo_list/pages/main/presentation/widget/create_todo_dialog.dart';
@@ -28,7 +29,7 @@ class MainView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Todo List'),
+        title: Text(context.t.title),
         actions: [
           IconButton(
             onPressed: () {

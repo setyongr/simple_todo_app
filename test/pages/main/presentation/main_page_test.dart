@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:simple_todo_list/app/registry/di.dart';
 import 'package:simple_todo_list/data/todos/repository/todo_repository.dart';
+import 'package:simple_todo_list/i18n/strings.g.dart';
 import 'package:simple_todo_list/pages/main/presentation/main_page.dart';
 import 'package:simple_todo_list/pages/main/presentation/main_page_keys.dart';
 
@@ -25,7 +26,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Then
-      expect(find.text('No todo data'), findsOneWidget);
+      expect(find.text(t.empty_todo), findsOneWidget);
     });
 
     testWidgets('Add todo correctly', (tester) async {
@@ -40,7 +41,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Then
-      expect(find.text('Add a new todo item'), findsOneWidget);
+      expect(find.text(t.add_text_hint), findsOneWidget);
 
       // When
       await tester.enterText(

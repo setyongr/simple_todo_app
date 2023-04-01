@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_todo_list/app/theme/space.dart';
 import 'package:simple_todo_list/common/widget/todo_item.dart';
+import 'package:simple_todo_list/i18n/strings.g.dart';
 import 'package:simple_todo_list/pages/main/bloc/todo_bloc.dart';
 import 'package:simple_todo_list/pages/main/presentation/main_page_keys.dart';
 
@@ -35,10 +36,10 @@ class TodoListView extends StatelessWidget {
 
         // Show empty view
         if (state.todos.isEmpty && state.loadState == LoadState.loaded) {
-          return const Padding(
-            padding: EdgeInsets.all(AppSpace.spaceM),
+          return Padding(
+            padding: const EdgeInsets.all(AppSpace.spaceM),
             child: Center(
-              child: Text('No todo data'),
+              child: Text(context.t.empty_todo),
             ),
           );
         }
