@@ -8,11 +8,13 @@ class TodoRepositoryImpl extends TodoRepository {
   final _todoLocalDataSource = TodoLocalDataSource();
 
   @override
-  Future<void> createTodo(TodoData todo) async {
-    await _todoLocalDataSource.createTodos(TodosCompanion(
+  Future<TodoData> createTodo(TodoData todo) async {
+    final result = await _todoLocalDataSource.createTodos(TodosCompanion(
       title: Value(todo.title),
       isDone: Value(todo.isDone),
     ));
+
+    return TodoData.fromLocalData(result);
   }
 
   @override

@@ -29,6 +29,16 @@ class MainView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Todo List'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.read<TodoBloc>().add(const ClearTodoEvent());
+            },
+            icon: const Icon(
+              Icons.delete,
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         key: const Key(MainPageKeys.addFAB),

@@ -7,8 +7,10 @@ class FakeTodoRepository extends TodoRepository {
   List<TodoData> todos = [];
 
   @override
-  Future<void> createTodo(TodoData todo) async {
-    todos.insert(todos.length, todo.copyWith(id: todos.length));
+  Future<TodoData> createTodo(TodoData todo) async {
+    final newData = todo.copyWith(id: todos.length);
+    todos.insert(todos.length, newData);
+    return newData;
   }
 
   @override

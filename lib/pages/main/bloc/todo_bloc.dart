@@ -9,7 +9,7 @@ part 'todo_event.dart';
 part 'todo_state.dart';
 
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
-  static const fetchLimit = 5;
+  static const fetchLimit = 3;
 
   final TodoRepository todoRepository;
 
@@ -19,6 +19,8 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     on<FetchTodoEvent>(_onFetchTodoEvent);
     on<CreateTodoEvent>(_onCreateTodoEvent);
     on<SetDoneEvent>(_onSetDoneEvent);
+    on<DeleteTodoEvent>(_onDeleteTodoEvent);
+    on<ClearTodoEvent>(_onClearTodoEvent);
   }
 
   Future<void> _onFetchTodoEvent(
@@ -30,6 +32,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       todos: event.page == 0 && !event.stealth ? [] : null,
     ));
 
+    final currentTodos = event.page == 0 ? <TodoData>[] : state.todos;
     var todos = <TodoData>[];
 
     if (state.loadState == LoadState.error) {
@@ -45,7 +48,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       return emit(state.copyWith(loadState: LoadState.error));
     }
 
-    var newTodos = state.todos + todos;
+    var newTodos = currentTodos + todos;
     var nextPageKey = todos.length < fetchLimit ? null : event.page + 1;
 
     // Replace data on page instead of appending
@@ -54,14 +57,17 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       final end = start + fetchLimit;
 
       final startPart = state.todos.sublist(0, start);
-      final endPart =
-          end < state.todos.length ? state.todos.sublist(end) : <TodoData>[];
+      final endPart = end < state.todos.length && !event.clearPreceding
+          ? state.todos.sublist(end)
+          : <TodoData>[];
 
       // Update todos data
       newTodos = startPart + todos + endPart;
 
       // Don't update next page key
-      nextPageKey = null;
+      if (!event.clearPreceding) {
+        nextPageKey = null;
+      }
     }
 
     emit(
@@ -116,6 +122,49 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
         page: (event.index / fetchLimit).floor(),
         replace: true,
         stealth: true,
+      ),
+    );
+  }
+
+  Future<void> _onDeleteTodoEvent(
+    DeleteTodoEvent event,
+    Emitter<TodoState> emit,
+  ) async {
+    try {
+      emit(state.copyWith(loadState: LoadState.loaded));
+      await todoRepository.delete(
+        event.todo,
+      );
+    } catch (e) {
+      return emit(state.copyWith(loadState: LoadState.error));
+    }
+
+    // Update Page
+    add(
+      FetchTodoEvent(
+        page: (event.index / fetchLimit).floor(),
+        stealth: true,
+        replace: true,
+        clearPreceding: true,
+      ),
+    );
+  }
+
+  Future<void> _onClearTodoEvent(
+    ClearTodoEvent event,
+    Emitter<TodoState> emit,
+  ) async {
+    try {
+      emit(state.copyWith(loadState: LoadState.loaded));
+      await todoRepository.clear();
+    } catch (e) {
+      return emit(state.copyWith(loadState: LoadState.error));
+    }
+
+    // Update Page
+    add(
+      const FetchTodoEvent(
+        page: 0,
       ),
     );
   }

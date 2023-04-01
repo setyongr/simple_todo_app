@@ -6,7 +6,7 @@ import 'package:simple_todo_list/pages/main/presentation/main_page.dart';
 import 'package:simple_todo_list/pages/main/presentation/main_page_keys.dart';
 
 import '../../../data/todo/repository/fake_todo_respository.dart';
-import '../../../test_suites/di_test.dart';
+import '../../../test_suites/test_di.dart';
 import '../../../test_suites/test_page.dart';
 
 void main() {

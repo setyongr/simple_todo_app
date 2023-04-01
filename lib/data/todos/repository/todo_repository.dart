@@ -8,7 +8,7 @@ abstract class TodoRepository {
   });
 
   /// Create a new todo entry
-  Future<void> createTodo(TodoData todo);
+  Future<TodoData> createTodo(TodoData todo);
 
   /// Set isDone for specific todo entry
   Future<void> setDone(TodoData todo, bool isDone);

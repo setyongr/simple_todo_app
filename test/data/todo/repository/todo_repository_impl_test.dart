@@ -7,7 +7,7 @@ import 'package:simple_todo_list/data/todos/model/todo_data.dart';
 import 'package:simple_todo_list/data/todos/repository/todo_repository.dart';
 import 'package:simple_todo_list/data/todos/repository/todo_repository_impl.dart';
 
-import '../../../test_suites/di_test.dart';
+import '../../../test_suites/test_di.dart';
 
 void main() {
   late AppDatabase database;

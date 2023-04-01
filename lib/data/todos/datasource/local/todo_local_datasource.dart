@@ -15,8 +15,8 @@ class TodoLocalDataSource {
   }
 
   /// Create new todo data
-  Future<void> createTodos(TodosCompanion todo) async {
-    await database.into(database.todos).insert(todo);
+  Future<Todo> createTodos(TodosCompanion todo) async {
+    return await database.into(database.todos).insertReturning(todo);
   }
 
   /// Update todo data
@@ -25,10 +25,12 @@ class TodoLocalDataSource {
         .write(todo);
   }
 
+  /// Update delete specific todo data
   Future<void> deleteTodos(int id) async {
     await (database.delete(database.todos)..where((t) => t.id.equals(id))).go();
   }
 
+  /// Clear all todos
   Future<void> clearTodos() async {
     await (database.delete(database.todos)).go();
   }

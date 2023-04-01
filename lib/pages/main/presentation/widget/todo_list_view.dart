@@ -63,18 +63,28 @@ class TodoListView extends StatelessWidget {
               }
 
               final todo = state.todos[index];
-              return TodoItem(
-                key: Key('${MainPageKeys.todoEntryPrefix}${todo.id}'),
-                todo: todo,
-                onTap: () {
-                  context.read<TodoBloc>().add(
-                        SetDoneEvent(
-                          index: index,
-                          todo: todo,
-                          isDone: !todo.isDone,
-                        ),
-                      );
+              return Dismissible(
+                key: Key('${MainPageKeys.todoDismissPrefix}${todo.id}'),
+                onDismissed: (direction) {
+                  context
+                      .read<TodoBloc>()
+                      .add(DeleteTodoEvent(index: index, todo: todo));
                 },
+                // Show a red background as the item is swiped away.
+                background: Container(color: Colors.red),
+                child: TodoItem(
+                  key: Key('${MainPageKeys.todoEntryPrefix}${todo.id}'),
+                  todo: todo,
+                  onTap: () {
+                    context.read<TodoBloc>().add(
+                          SetDoneEvent(
+                            index: index,
+                            todo: todo,
+                            isDone: !todo.isDone,
+                          ),
+                        );
+                  },
+                ),
               );
             },
           ),

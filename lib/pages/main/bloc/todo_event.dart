@@ -15,13 +15,17 @@ class FetchTodoEvent extends TodoEvent {
   /// Should replace page instead of append
   final bool replace;
 
+  /// Should clear preceding page, will work if [replace] is true
+  final bool clearPreceding;
+
   @override
-  List<Object?> get props => [page, stealth, replace];
+  List<Object?> get props => [page, stealth, replace, clearPreceding];
 
   const FetchTodoEvent({
     required this.page,
     this.stealth = false,
     this.replace = false,
+    this.clearPreceding = false,
   });
 }
 
