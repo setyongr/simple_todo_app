@@ -1,16 +1,50 @@
-# simple_todo_list
+# Simple Todo List
 
-Simple Todo List App
+## Requirement
 
-## Getting Started
+Flutter 3.7.7
 
-This project is a starting point for a Flutter application.
+## Supported Platform
 
-A few resources to get you started if this is your first Flutter project:
+- iOS
+- Android
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Architecture
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+We use Bloc as an state management pattern. We also use GetIt as dependency injection.
+
+The directory is structured as:
+
+- app : Contains application related configuration
+    - routes : Contains list of screen routes
+    - themes : Contain theme configuration like spacing, text, or colors
+    - registry : Contain dependency injection registry and route registry
+    - app.dart : Main Application widget
+- common : Contain common code
+- data : Contain code that related to a data wether it from remote source or local source
+- pages : Contain pages of the application
+    - Main : Main App Screen
+        - bloc : Bloc, State, and Event for the main page
+        - model : Model object used by main page
+        - presentation : UI Code for the main page
+- main.dart : Contain application entry point
+
+# Library Used
+
+- flutter_bloc
+- get_it
+- go_router
+- drift
+
+# Screenshot
+
+| List | Add |
+| -- | -- |
+| ![](screenshots/list.png) | ![](screenshots/add.png) |
+
+# How To Run
+
+1. Open Android Studio or VSCode
+2. Make sure you install atleast Flutter 3.7.7
+3. Run `flutter pub get` to install dependency
+4. Run it with `flutter run lib/main.dart`

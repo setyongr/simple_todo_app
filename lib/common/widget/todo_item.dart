@@ -31,8 +31,12 @@ class TodoItem extends StatelessWidget {
               child: Text(
                 todo.title,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: todo.isDone ? Colors.grey : Colors.black87,
                       decoration:
                           todo.isDone ? TextDecoration.lineThrough : null,
+                      decorationColor:
+                          todo.isDone ? Colors.grey : Colors.black87,
                     ),
               ),
             )

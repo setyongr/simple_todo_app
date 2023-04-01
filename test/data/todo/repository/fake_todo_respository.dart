@@ -29,4 +29,14 @@ class FakeTodoRepository extends TodoRepository {
   }) async {
     return todos.sublist(offset, min(todos.length, limit + offset));
   }
+
+  @override
+  Future<void> clear() async {
+    todos.clear();
+  }
+
+  @override
+  Future<void> delete(TodoData todo) async {
+    todos = todos.where((e) => e.id != todo.id).toList();
+  }
 }

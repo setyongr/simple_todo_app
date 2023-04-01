@@ -24,4 +24,12 @@ class TodoLocalDataSource {
     await (database.update(database.todos)..where((t) => t.id.equals(id)))
         .write(todo);
   }
+
+  Future<void> deleteTodos(int id) async {
+    await (database.delete(database.todos)..where((t) => t.id.equals(id))).go();
+  }
+
+  Future<void> clearTodos() async {
+    await (database.delete(database.todos)).go();
+  }
 }

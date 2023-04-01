@@ -37,4 +37,14 @@ class TodoRepositoryImpl extends TodoRepository {
 
     return result.map((e) => TodoData.fromLocalData(e)).toList();
   }
+
+  @override
+  Future<void> clear() async {
+    await _todoLocalDataSource.clearTodos();
+  }
+
+  @override
+  Future<void> delete(TodoData todo) async {
+    await _todoLocalDataSource.deleteTodos(todo.id);
+  }
 }

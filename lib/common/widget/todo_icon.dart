@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_todo_list/app/theme/space.dart';
 import 'package:simple_todo_list/common/utils/text_utils.dart';

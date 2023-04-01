@@ -13,7 +13,7 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
-    const FlexScheme usedScheme = FlexScheme.red;
+    const FlexScheme usedScheme = FlexScheme.brandBlue;
     return MaterialApp.router(
       title: 'Todo App',
       theme: FlexThemeData.light(

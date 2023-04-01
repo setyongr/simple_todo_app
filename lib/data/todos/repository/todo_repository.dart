@@ -12,4 +12,10 @@ abstract class TodoRepository {
 
   /// Set isDone for specific todo entry
   Future<void> setDone(TodoData todo, bool isDone);
+
+  /// Delete for specific todo entry
+  Future<void> delete(TodoData todo);
+
+  /// Clear all todo entry
+  Future<void> clear();
 }

@@ -56,3 +56,28 @@ class SetDoneEvent extends TodoEvent {
     required this.isDone,
   });
 }
+
+/// Delete a todo entry
+class DeleteTodoEvent extends TodoEvent {
+  /// The index of the item
+  final int index;
+
+  /// The todo entry that want to be updated
+  final TodoData todo;
+
+  @override
+  List<Object?> get props => [index, todo];
+
+  const DeleteTodoEvent({
+    required this.index,
+    required this.todo,
+  });
+}
+
+/// Delete a todo entry
+class ClearTodoEvent extends TodoEvent {
+  @override
+  List<Object?> get props => [];
+
+  const ClearTodoEvent();
+}
