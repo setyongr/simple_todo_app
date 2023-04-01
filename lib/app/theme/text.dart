@@ -1,0 +1,3 @@
+class AppTypography {
+  AppTypography._();
+}
